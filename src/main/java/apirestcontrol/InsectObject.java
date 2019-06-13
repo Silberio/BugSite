@@ -23,4 +23,5 @@ public class InsectObject {
 		  this.title = title;
 		  this.description = description;
 	  }
+	  
 }

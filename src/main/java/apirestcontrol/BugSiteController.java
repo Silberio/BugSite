@@ -1,7 +1,9 @@
 package apirestcontrol;
 
+import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,14 +21,15 @@ public class BugSiteController {
 		this.repository = repository;
 	}
 
-	// get all bugs from the repo
+
 	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/bugs")
-	List<InsectObject> getAll() { 
-		
-		return repository.findAll();
+	public ResponseEntity getAll() { 
+	   return ResponseEntity.ok(new HashMap<String, List<InsectObject>>() {{
+		   put("bug", repository.findAll());
+	   }});
 	}
-
+	
 	//	post a new bug
 	// Example post:
 	// curl -X POST localhost:8080/bugs -H "Content-type:application/json" -d "{\"title\":\"Moth\", \"description\":\"flying cutie\"}"
@@ -38,6 +41,10 @@ public class BugSiteController {
 	@GetMapping("/bugs/{id}")
 	InsectObject getByID(@PathVariable Long id) {
 		return repository.getOne(id);
+	}
+	
+	public InsectRepository getRepository() {
+		return repository;
 	}
 	
 }
