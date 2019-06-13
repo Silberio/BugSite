@@ -11,3 +11,7 @@ Make a properly functioning POST method to allow POSTing of a full darn array of
 Make the whole thing persistence. So far, my idea is to add JDBC persistence. Idk yet how I'm gonna do this, but I will. 
 
 Security. Make the whole API secure.
+
+## How it works
+
+It's based on Spring Boot. Nothing fancy. Built basically just following Spring.io's  official RESTful guide and some tinkering. Objects posted go into a JPA Repository
