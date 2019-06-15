@@ -16,6 +16,7 @@ public class InsectObject {
 	  private @Id @GeneratedValue Long id;
 	  private String title;
 	  private String description;
+	  private String imageURL;
 	  
 	  InsectObject() {}
 	  
@@ -23,5 +24,10 @@ public class InsectObject {
 		  this.title = title;
 		  this.description = description;
 	  }
-	  
+
+	  InsectObject(String title, String description, String imageURL) {
+		  this.title = title;
+		  this.description = description;
+		  this.imageURL = imageURL;
+	  }
 }

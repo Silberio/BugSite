@@ -3,11 +3,13 @@ package apirestcontrol;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BugSiteController {
 
-	private final InsectRepository repository;
+	@Autowired
+	private InsectRepository repository;
 
 	BugSiteController(InsectRepository repository) {
 		this.repository = repository;
@@ -31,8 +34,7 @@ public class BugSiteController {
 	}
 	
 	//	post a new bug
-	// Example post:
-	// curl -X POST localhost:8080/bugs -H "Content-type:application/json" -d "{\"title\":\"Moth\", \"description\":\"flying cutie\"}"
+	// it is posible to either post a bug with only title n description, but also additionally with an image URL
 	@PostMapping("/bugs")
 	InsectObject newInsect(@RequestBody InsectObject newInsect) {
 		return repository.save(newInsect);
@@ -42,6 +44,7 @@ public class BugSiteController {
 	InsectObject getByID(@PathVariable Long id) {
 		return repository.getOne(id);
 	}
+
 	
 	public InsectRepository getRepository() {
 		return repository;
